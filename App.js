@@ -1,77 +1,16 @@
-import React, { useRef } from "react";
-import {
-  Alert,
-  Button,
-  StyleSheet,
-  View,
-  Animated,
-  TouchableWithoutFeedback,
-} from "react-native";
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
 
-const ButtonBasics = () => {
-  const scaleAnim = useRef(new Animated.Value(1)).current; // Initial scale value
-
-  const onPress = () => {
-    Alert.alert("You tapped the button!");
-  };
-
-  const handlePressIn = () => {
-    Animated.spring(scaleAnim, {
-      toValue: 0.9, // Scale down to 90%
-      useNativeDriver: true, // Use native driver for better performance
-    }).start();
-  };
-
-  const handlePressOut = () => {
-    Animated.spring(scaleAnim, {
-      toValue: 1, // Scale back to original size
-      useNativeDriver: true,
-    }).start();
-  };
-
+const App = () => {
   return (
     <View style={styles.container}>
-      <View style={styles.buttonContainer}>
-        <TouchableWithoutFeedback
-          onPress={onPress}
-          onPressIn={handlePressIn}
-          onPressOut={handlePressOut}
-        >
-          <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
-            <Button title="Press Me" />
-          </Animated.View>
-        </TouchableWithoutFeedback>
-      </View>
-      <View style={styles.buttonContainer}>
-        <TouchableWithoutFeedback
-          onPress={onPress}
-          onPressIn={handlePressIn}
-          onPressOut={handlePressOut}
-        >
-          <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
-            <Button title="Press Me" color="#841584" />
-          </Animated.View>
-        </TouchableWithoutFeedback>
-      </View>
-      <View style={styles.alternativeLayoutButtonContainer}>
-        <TouchableWithoutFeedback
-          onPress={onPress}
-          onPressIn={handlePressIn}
-          onPressOut={handlePressOut}
-        >
-          <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
-            <Button title="This looks great!" />
-          </Animated.View>
-        </TouchableWithoutFeedback>
-        <TouchableWithoutFeedback
-          onPress={onPress}
-          onPressIn={handlePressIn}
-          onPressOut={handlePressOut}
-        >
-          <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
-            <Button title="OK!" color="#841584" />
-          </Animated.View>
-        </TouchableWithoutFeedback>
+      {/* Teks di tengah layar */}
+      <Text style={styles.text}>2 kotak dengan warna yang berbeda</Text>
+
+      {/* Kotak-kotak dengan FlexBox */}
+      <View style={styles.boxContainer}>
+        <View style={[styles.box, { backgroundColor: "#FF6347" }]} />
+        <View style={[styles.box, { backgroundColor: "#4682B4" }]} />
       </View>
     </View>
   );
@@ -81,15 +20,24 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#D3D3D3",
   },
-  buttonContainer: {
-    margin: 20,
+  text: {
+    fontSize: 24,
+    color: "blue",
+    fontWeight: "bold",
+    marginBottom: 50,
   },
-  alternativeLayoutButtonContainer: {
-    margin: 20,
+  boxContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
+    width: "80%",
+  },
+  box: {
+    width: 100,
+    height: 100,
   },
 });
 
-export default ButtonBasics;
+export default App;
